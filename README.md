@@ -1,4 +1,4 @@
-# QSBSS
+# QSBSC
 Quantitative Systems Biology of Single Cells class repository
 
 We will add more here as the course proceeds.
