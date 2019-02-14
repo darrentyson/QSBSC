@@ -37,6 +37,7 @@ uc <- read.table(normalizePath('../../Data/tung/molecules.txt'), sep='\t')
 rc <- read.table(normalizePath('../../Data/tung/reads.txt'), sep='\t')
 
 # generate an output file (this demonstrates you have been able to load both data sets)
+write.csv(data.frame(pulled_all_data=all(umi_counts==uc)),file='MyDataLoadTest.csv',row.names=FALSE)
 # Homework: 
 # 1) make your own directory in the R_code folder (use your last name)
 # 2) duplicate this file into your directory
