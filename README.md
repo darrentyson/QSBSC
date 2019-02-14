@@ -15,3 +15,17 @@ Using your choice of how to interact with GitHub (Sourcetree, command line inter
 GitHub Desktop, etc.), you should clone this repository onto your local computer and perform 
 the steps described in the commented lines at the bottom of 
 `./R_code/Tyson/TestCodeForDataLoadingAndGit.r`
+
+## Tip for keeping Git repo clutter-free
+If you are using SourceTree you should go to Preferences and `Edit File` the Global Ignore list (a hidden file named `.gitignore_global` usually saved in your user directory that you could also edit manually.)
+
+You should add things like this into the file:
+```
+*~
+.DS_Store
+.Rhistory
+.Rapp.history
+Iconr
+*.pyc
+```
+So files matching these criteria do not get uploaded to GitHub when you commit (they will not be tracked).
