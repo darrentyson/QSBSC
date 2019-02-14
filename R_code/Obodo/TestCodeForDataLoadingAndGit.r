@@ -33,14 +33,19 @@ plot(umi_sum, read_sum, main='GitHub data')
 # are often not generalized for different computers
 # you can add this function into code as needed
 
-uc <- read.table(normalizePath('../../Data/tung/molecules.txt'), sep='\t')
-rc <- read.table(normalizePath('../../Data/tung/reads.txt'), sep='\t')
+uc <- read.table(normalizePath('Data/tung/molecules.txt'), sep='\t')
+rc <- read.table(normalizePath('Data/tung/reads.txt'), sep='\t')
 
 # generate an output file (this demonstrates you have been able to load both data sets)
 # Homework: 
 # 1) make your own directory in the R_code folder (use your last name)
+dir.create(file.path('R_code/Obodo'))
+newObodoFile = file.path('R_code/Obodo')
+
 # 2) duplicate this file into your directory
+file.copy(c(normalizePath('R_code/Tyson/TestCodeForDataLoadingAndGit.r')), newObodoFile)
 # 3) execute the code and generate the test file that demonstrates you successfully loaded
 #    all dta
+write.csv(data.frame(pulled_all_data=all(umi_counts==uc)),file= file.path(newObodoFile,'MyDataLoadTest.csv'),row.names=FALSE)
 # 4) commit your changes to the QSBSS GitHub repo
 
