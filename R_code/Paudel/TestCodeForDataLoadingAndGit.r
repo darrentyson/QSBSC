@@ -8,7 +8,7 @@
 # https://hemberg-lab.github.io/scRNA.seq.course/index.html
 # https://doi.org/10.1038/srep39921
 
-setwd("/Users/paudelbb/QSBSC/R_code")
+setwd("/Users/paudelbb/QSBSC/R_code/Paudel")
 # remote data (on GutHub)
 umi_counts <- read.table("https://github.com/hemberg-lab/scRNA.seq.course/blob/master/tung/molecules.txt?raw=true", sep = "\t")
 read_counts <- read.table("https://github.com/hemberg-lab/scRNA.seq.course/blob/master/tung/reads.txt?raw=true", sep = "\t")
