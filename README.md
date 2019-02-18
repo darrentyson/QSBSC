@@ -29,3 +29,6 @@ Iconr
 *.pyc
 ```
 So files matching these criteria do not get uploaded to GitHub when you commit (they will not be tracked).
+
+## 2019-02-18: Added new flow cytometry data into `Data` directory
+Please see the README file on GitHub https://github.com/darrentyson/QSBSC/tree/master/Data/CytobankData/experiment_46259_files
