@@ -32,3 +32,8 @@ So files matching these criteria do not get uploaded to GitHub when you commit (
 
 ## 2019-02-18: Added new flow cytometry data into `Data` directory
 Please see the README file on GitHub https://github.com/darrentyson/QSBSC/tree/master/Data/CytobankData/experiment_46259_files
+
+## A warning about using Excel to open data files containing gene names
+For those of you still considering using Excel on occasion to inspect data files, please read this paper and understand the risks involved:
+https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1044-7
+
