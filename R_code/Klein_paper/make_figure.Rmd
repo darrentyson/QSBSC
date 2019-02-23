@@ -1,9 +1,9 @@
 ---
 title: "Case Study - Making Figures from Klein paper"
 output:
+  html_notebook: default
   html_document:
     df_print: paged
-  html_notebook: default
   pdf_document: default
 ---
 
@@ -16,9 +16,11 @@ environment tab. This is where variables, values, and loaded functions
 are stored. Finally, look to the bottom right. Here you can see files on
 your computer, see plots, see loaded packages, and get help.
 
+### Reference: Wagner et al., 2018 (Allon Klein)
+http://science.sciencemag.org/content/360/6392/981
 
-We want to reproduce a figure from the Klein paper. The easiest one is Figure 1A. You should have the data and code to reproduce this figure in the /QSCBC/Data/Klein_fig1 directory. Here is a picture of the figure we are trying to reproduce:
-
+We want to reproduce a figure from the Klein paper. The easiest one is Figure 1B. This file and the data in the `/QSCBC/Data/Klein_fig1` directory should be all you need to reproduce the _4hpf_ figure. Here is a picture of the figure we are trying to reproduce:
+![Fig1B.](Fig1B.png)
 
 One of the first things you should do when you start
 an R session is to see what is in your environment.
@@ -46,30 +48,27 @@ data_path <- '../../Data/Klein_fig1'
 ```
 
 
-Now, we need to read in the data. For single-cell RNA sequencing, this data is a matrix of cells with read counts. This is a large dataset, so it may take a few seconds.
+Now, we need to read in the data. For single-cell RNA sequencing, this data is a matrix of cells with read counts. This is a large dataset, so it may take a few seconds. Then inspect the first five rows and columns of data.
 
 ```{r}
-library(dplyr)
 compfile <- file.path(data_path,"GSM3067189_04hpf_nm.csv.zip")
 raw_counts <- read.table(unz(compfile, "GSM3067189_04hpf_nm.csv"),
                          sep = ",", header = TRUE, row.names = 1)
-head(raw_counts)
+raw_counts[1:5,1:5]
 ```
 
 
-This dataset is large. To compress the data into a readable form by the R package, create a new object. Use the following settings to clean the dataset.
+This dataset is large. To compress the data into a more manageable form use the _Seurat_ R package to create a new object and clean the dataset.
 
 ```{r}
-library(Seurat)
 hpf4 <- CreateSeuratObject(raw.data = raw_counts, min.cells = 3, 
                            min.genes = 200, project = "hpf4")
 ```
 
 
-This data came pre-normalized. However, we need to identify features (genes) that define the data, and scale the data so the gene counts are not too low.
+The data came pre-normalized (you can ignore the warnings below). However, we need to identify features (genes) that define the data and scale the data so the gene counts are not too low.
 
 ```{r}
-library(Seurat)
 hpf4 <- FindVariableGenes(hpf4, do.plot = F)
 hpf4 <- ScaleData(hpf4, display.progress = T)
 ```
@@ -78,7 +77,6 @@ hpf4 <- ScaleData(hpf4, display.progress = T)
 Ok, so now we can do some dimensionality reduction and plotting of the data. Principal Component Analysis (PCA) identifies the axes of most variance in the dataset. By projecting the data on the axes with the most variance, one can identify groups that exist in the high dimensional space.
 
 ```{r}
-library(Seurat)
 hpf4 <- RunPCA(object = hpf4, 
               pc.genes = hpf4@var.genes, 
               genes.print = 10)
@@ -87,10 +85,9 @@ PCAPlot(object = hpf4)
 ```
 
 
-Another dimensionality reduction technique used in single-cell data analysis is t-distributed Stochastic Neighbor Embedding (tSNE). This is a non-linear reduction approach and can emphasis local and global similarities better than PCA.
+Another dimensionality reduction technique used in single-cell data analysis is t-distributed Stochastic Neighbor Embedding (tSNE). This is a non-linear reduction approach that can emphasize local and global similarities better than PCA.
 
 ```{r}
-library(Seurat)
 # tSNE is run on the first 10 principal components (for speed)
 hpf4 <- RunTSNE(object = hpf4,
                     dims.use = 1:10,
@@ -104,10 +101,9 @@ TSNEPlot(object = hpf4) +
 ```
 
 
-So, now we have some semantics. How do we plot data exactly as it appears in the paper? The short answer is that with a tool like tSNE, it is almost impossible. Because the process is stochastic, every run of tSNE can be different. However, the authors do provide information on how each cell was clustered. So, we will overlay that data on the tSNE plot.
+So, now we have some semantics. How do we plot data exactly as it appears in the paper? The short answer is that with a tool like tSNE, it is almost impossible. Because the process is stochastic, every run of tSNE can be different. However, the authors do provide information on how each cell was clustered. So, we will overlay that information on the tSNE plot.
 
 ```{r}
-library(Seurat)
 labels <- read.csv(file.path(data_path,"GSM3067189_04hpf_clustID.txt"),
                    header = F,
                    row.names = row.names(hpf4@meta.data))
@@ -122,9 +118,6 @@ TSNEPlot(object = hpf4)
 Ok, starting to look better. Now, we need to change those cluster identifiers to biological identifiers. The authors provide a file for that as well. We will intersect those two pieces of information, and overlay the biological identifiers on the plot.
 
 ```{r}
-library(plyr)
-library(dplyr)
-library(Seurat)
 names <- read.csv(file.path(data_path,"GSE112294_ClusterNames.csv"))
 names_hpf4 <- names[1:4,]
 names_hpf4$cluster <- c("Epidermal", "Mesoderm", "Epiblast", "Germline")
@@ -144,7 +137,6 @@ TSNEPlot(object = hpf4)
 Finally, we want to match the colors and add some plot annotations (experiment name and number of cells). Here, the colors and text are added to the plot.
 
 ```{r}
-library(Seurat)
 TSNEPlot(object = hpf4) + ylim(-35,35) + xlim(-40,35) +
   geom_text(x=-25, y=-32, label=sprintf("%d cells", nrow(hpf4@meta.data))) +
   geom_text(x=-25, y=32, label="4hpf") +
