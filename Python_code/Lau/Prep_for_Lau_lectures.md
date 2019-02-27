@@ -1,7 +1,8 @@
 ## Preparing for Lau lectures
-You will need to use your Anaconda installation of Python and install a few other packages to run his code. If you have not already installed it, go here <https://www.anaconda.com/distribution/> and follow directions. If you want to learn more about Anaconda, check out this link <https://docs.anaconda.com/anaconda/user-guide/getting-started/>.
+You will need to use your Anaconda installation of Python and install a few other packages to run his code. If you have not already installed it, go here <https://www.anaconda.com/distribution/> and follow directions. If you want to learn more about Anaconda, check out this link <https://docs.anaconda.com/anaconda/user-guide/getting-started/>.  
 
-    If you have had Anaconda on your computer for a while already (>6 mos) you should update it using the code below (must be uncommented); this is unnecessary with a new installation.
+If you have had Anaconda on your computer for a while already (>6 mos) you should update it using the code below (must be uncommented); this is unnecessary with a new installation.
+
 ```
 #    conda update -n root conda
 ```
