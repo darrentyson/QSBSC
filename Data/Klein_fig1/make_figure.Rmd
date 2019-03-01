@@ -37,7 +37,7 @@ install.packages("dplyr", repos = "http://cran.us.r-project.org")
 Next, you need to get into the directory associated with your data. In this case, my data is in the Klein_fig1 folder in the Data folder of the class folder
 
 ```{r}
-setwd('~/Documents/QuarantaLab/QSBSC/Data/Klein_fig1/')
+setwd('~/QSBSC/Data/Klein_fig1/')
 ```
 
 
