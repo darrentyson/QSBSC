@@ -37,3 +37,8 @@ Please see the README file on GitHub https://github.com/darrentyson/QSBSC/tree/m
 For those of you still considering using Excel on occasion to inspect data files, please read this paper and understand the risks involved:
 https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1044-7
 
+
+## Homework for 2019-02-25
+Please read both papers: https://doi.org/10.7554/eLife.27041.001 and http://science.sciencemag.org/content/360/6392/981
+The Wagner et al. (Allon Klein's _eLife_) paper will be presented by Cody Heiser and Corey Hayford will walk through the code to reproduce Fig1B from the paper (see `R_code/Klein_paper`). You may copy the file `R_code/Klein_paper/make_figure.Rmd` into your own directory and modify/execute as you like. We will have an open discussion about the _eLife_ paper the second half of class.
+
