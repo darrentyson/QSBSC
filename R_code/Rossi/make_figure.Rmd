@@ -44,7 +44,11 @@ temp <- sapply(pkgs, getPackageIfNeeded)
 The data are in a different directory than this file. We will make an object of the path to the data relative to the current directory (assuming you are starting in the directory where this files exists: in `R_code/Klein_paper` or in your own `R_code` directory).
 
 ```{r}
+<<<<<<< HEAD:Data/Klein_fig1/make_figure.Rmd
+setwd('~/QSBSC/Data/Klein_fig1/')
+=======
 data_path <- '../../Data/Klein_fig1'
+>>>>>>> a23e26a58a0abae1e583ada023893d9df426409a:R_code/Rossi/make_figure.Rmd
 ```
 
 
