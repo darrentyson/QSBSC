@@ -41,7 +41,7 @@ ggsave(paste0(plotDir, plotName, 'histogramAllGenes.pdf'),
        height=10,width=10)
 
 ##
-data983B <- read.csv('extractedData/dentistData/WM983b_NoDrug_20150525.txt')
+data983B <- read.csv('dentistData/WM983b_NoDrug_20150525.txt')
 plotName <- 'WM983b_noDrug_20150525'
 meltData <- melt(data983B,id=c('cellID','Xpos','Ypos'))
 ggplot(meltData, aes(x=value))+geom_histogram()+

@@ -54,8 +54,8 @@ ggplot(Gini2, aes(x=Gini_set1,y=Gini_set2,label=genes))+
 ggsave(paste0('~/Dropbox/cancer-rna-fish/graphs/RNAFISH/giniReplicates/WM9_noDrug.pdf'),height=6,width=7)
 
 ## control data
-controlData1 <- read.csv('extractedData/dentistData/20160502_WM9_noDrug_controlGenes.txt')
-controlData2 <- read.csv('extractedData/dentistData/20160503_WM9_noDrug_controlGenes.txt')
+controlData1 <- read.csv('dentistData/20160502_WM9_noDrug_controlGenes.txt')
+controlData2 <- read.csv('dentistData/20160503_WM9_noDrug_controlGenes.txt')
 
 control1_gini <- apply(controlData1[,3:6],2,function(x) ineq(x,type='Gini'))
 control2_gini <- apply(controlData2[,3:5],2,function(x) ineq(x,type='Gini'))
@@ -72,7 +72,7 @@ ggplot(Gini3, aes(x=Gini_set2,label=genes))+
 ggsave(paste0('~/Dropbox/cancer-rna-fish/graphs/RNAFISH/Gini_ExtraControlGenes.pdf'),height=3,width=10)
 
 ## Add in the countries
-countries <- read.csv('extractedData/giniData/rawdata_2172.csv', header=FALSE)
+countries <- read.csv('giniData/rawdata_2172.csv', header=FALSE)
 countriesFinal <- countries[c(2,8,10,15,20,26,43,66,98,119,126,140),]
 
 ggplot(countriesFinal, aes(x=V3*0.01,label=V2))+
@@ -126,8 +126,8 @@ WM983b_Gini$genes <- rownames(WM983b_Gini)
 WM983b_Gini$dataset <- 'WM983b_20150525'
 
 ## 1205Lu data
-Lu1205_hyb1 <- read.csv('extractedData/dentistData/20160507_1205Lu_hyb1.txt')
-Lu1205_hyb3 <- read.csv('extractedData/dentistData/20160507_1205Lu_hyb3.txt')
+Lu1205_hyb1 <- read.csv('dentistData/20160507_1205Lu_hyb1.txt')
+Lu1205_hyb3 <- read.csv('dentistData/20160507_1205Lu_hyb3.txt')
 Lu1205_hyb3 <- Lu1205_hyb3[,c(1:5)]
 Lu_1 <- apply(Lu1205_hyb1[,3:6],2,function(x) ineq(x,type='Gini'))
 Lu_3 <- apply(Lu1205_hyb3[,3:5],2,function(x) ineq(x,type='Gini'))
@@ -136,8 +136,8 @@ Lu1205_Gini$genes <- rownames(Lu1205_Gini)
 Lu1205_Gini$dataset <- '1205Lu_20160507'
 
 # replicates 1205Lu
-Lu1205_hyb1 <- read.csv('extractedData/dentistData/20160611_1205Lu_hyb1.txt')
-Lu1205_hyb3 <- read.csv('extractedData/dentistData/20160611_1205Lu_hyb3.txt')
+Lu1205_hyb1 <- read.csv('dentistData/20160611_1205Lu_hyb1.txt')
+Lu1205_hyb3 <- read.csv('dentistData/20160611_1205Lu_hyb3.txt')
 Lu1205_hyb3 <- Lu1205_hyb3[,c(1:5)]
 Lu_1 <- apply(Lu1205_hyb1[,3:6],2,function(x) ineq(x,type='Gini'))
 Lu_3 <- apply(Lu1205_hyb3[,3:5],2,function(x) ineq(x,type='Gini'))
@@ -154,8 +154,8 @@ ggplot(LuReps, aes(x=value,y=value2,label=genes))+
 ggsave('graphs/RNAFISH/giniReplicates/Lu1205.pdf',height=6,width=7)
 
 #SK-MEL-28 data
-SKMEL_hyb1 <- read.csv('extractedData/dentistData/20160513_SKMEL28_hyb1.txt')
-SKMEL_hyb3 <- read.csv('extractedData/dentistData/20160513_SKMEL28_hyb3.txt')
+SKMEL_hyb1 <- read.csv('dentistData/20160513_SKMEL28_hyb1.txt')
+SKMEL_hyb3 <- read.csv('dentistData/20160513_SKMEL28_hyb3.txt')
 SKMEL_1 <- apply(SKMEL_hyb1[,4:6],2,function(x) ineq(x,type='Gini'))
 SKMEL_3 <- apply(SKMEL_hyb3[,3:5],2,function(x) ineq(x,type='Gini'))
 SKMEL_Gini <- rbind(melt(SKMEL_1),melt(SKMEL_3))
@@ -163,8 +163,8 @@ SKMEL_Gini$genes <- rownames(SKMEL_Gini)
 SKMEL_Gini$dataset <- 'SKMEL28_20160513'
 
 # replicates SKMEL28
-SKMEL_hyb1 <- read.csv('extractedData/dentistData/20160614_SKMEL28_hyb1.txt')
-SKMEL_hyb3 <- read.csv('extractedData/dentistData/20160614_SKMEL28_hyb3.txt')
+SKMEL_hyb1 <- read.csv('dentistData/20160614_SKMEL28_hyb1.txt')
+SKMEL_hyb3 <- read.csv('dentistData/20160614_SKMEL28_hyb3.txt')
 SKMEL_hyb3 <- SKMEL_hyb3[,c(1:5)]
 SKMEL_1 <- apply(SKMEL_hyb1[,4:6],2,function(x) ineq(x,type='Gini'))
 SKMEL_3 <- apply(SKMEL_hyb3[,3:5],2,function(x) ineq(x,type='Gini'))
@@ -182,11 +182,11 @@ ggsave('graphs/RNAFISH/giniReplicates/SKMEL28.pdf',height=6,width=7)
 
 
 ## PC9 data
-PC9_pool1_1 <- read.csv('extractedData/dentistData/20160522_PC9_pool1.txt') 
+PC9_pool1_1 <- read.csv('dentistData/20160522_PC9_pool1.txt') 
 PC9data <- PC9_pool1_1
-PC9_pool2_1 <- read.csv('extractedData/dentistData/20160522_PC9_pool2.txt') 
-PC9_pool1_2 <- read.csv('extractedData/dentistData/20160602_PC9_pool1.txt') 
-PC9_pool2_2 <- read.csv('extractedData/dentistData/20160602_PC9_pool2.txt') 
+PC9_pool2_1 <- read.csv('dentistData/20160522_PC9_pool2.txt') 
+PC9_pool1_2 <- read.csv('dentistData/20160602_PC9_pool1.txt') 
+PC9_pool2_2 <- read.csv('dentistData/20160602_PC9_pool2.txt') 
 PC9_pool1_1 <- apply(PC9_pool1_1[,3:6],2,function(x) ineq(x,type='Gini'))
 PC9_pool2_1 <- apply(PC9_pool2_1[,4:5],2,function(x) ineq(x,type='Gini'))
 PC9_pool1_2 <- apply(PC9_pool1_2[,3:6],2,function(x) ineq(x,type='Gini'))
@@ -207,8 +207,8 @@ ggsave('graphs/RNAFISH/giniReplicates/PC9.pdf',height=6,width=7)
 
 
 ## MDA-MB-231
-MDAMB231_pool1 <- read.csv('extractedData/dentistData/20160517_MDAMB231_pool1.txt')
-MDAMB231_pool2 <- read.csv('extractedData/dentistData/20160517_MDAMB231_pool2.txt')
+MDAMB231_pool1 <- read.csv('dentistData/20160517_MDAMB231_pool1.txt')
+MDAMB231_pool2 <- read.csv('dentistData/20160517_MDAMB231_pool2.txt')
 MDAgini_1 <- apply(MDAMB231_pool1[,3:6],2,function(x) ineq(x,type='Gini'))
 MDAgini_2 <- apply(MDAMB231_pool2[,3:6],2,function(x) ineq(x,type='Gini'))
 MDAgini <- rbind(melt(MDAgini_1),melt(MDAgini_2))
@@ -216,8 +216,8 @@ MDAgini$genes <- rownames(MDAgini)
 MDAgini$dataset <- 'MDAMB231_20160517'
 
 # replicates MDAMB231
-MDAMB231_pool1 <- read.csv('extractedData/dentistData/20160606_MDAMB231_pool1.txt')
-MDAMB231_pool2 <- read.csv('extractedData/dentistData/20160606_MDAMB231_pool2.txt')
+MDAMB231_pool1 <- read.csv('dentistData/20160606_MDAMB231_pool1.txt')
+MDAMB231_pool2 <- read.csv('dentistData/20160606_MDAMB231_pool2.txt')
 MDAgini_1 <- apply(MDAMB231_pool1[,3:6],2,function(x) ineq(x,type='Gini'))
 MDAgini_2 <- apply(MDAMB231_pool2[,3:6],2,function(x) ineq(x,type='Gini'))
 MDAgini2 <- rbind(melt(MDAgini_1),melt(MDAgini_2))
@@ -233,8 +233,8 @@ ggplot(MDAReps, aes(x=value,y=value2,label=genes))+
 ggsave('graphs/RNAFISH/giniReplicates/MDAMB231.pdf',height=6,width=7)
 
 #Hela cells
-Hela_pool1 <- read.csv('extractedData/dentistData/20160527_Hela_pool1.txt')
-Hela_pool2 <- read.csv('extractedData/dentistData/20160527_Hela_pool2.txt')
+Hela_pool1 <- read.csv('dentistData/20160527_Hela_pool1.txt')
+Hela_pool2 <- read.csv('dentistData/20160527_Hela_pool2.txt')
 Hela_1 <- apply(Hela_pool1[,3:6],2,function(x) ineq(x,type='Gini'))
 Hela_2 <- apply(Hela_pool2[,3:6],2,function(x) ineq(x,type='Gini'))
 Helagini <- rbind(melt(Hela_1),melt(Hela_2))
@@ -242,8 +242,8 @@ Helagini$genes <- rownames(Helagini)
 Helagini$dataset <- 'Hela_20160527'
 
 # replicates HeLa
-Hela_pool1 <- read.csv('extractedData/dentistData/20160712_Hela_pool1.txt')
-Hela_pool2 <- read.csv('extractedData/dentistData/20160712_Hela_pool2.txt')
+Hela_pool1 <- read.csv('dentistData/20160712_Hela_pool1.txt')
+Hela_pool2 <- read.csv('dentistData/20160712_Hela_pool2.txt')
 Hela_1 <- apply(Hela_pool1[,3:6],2,function(x) ineq(x,type='Gini'))
 Hela_2 <- apply(Hela_pool2[,3:6],2,function(x) ineq(x,type='Gini'))
 Helagini2 <- rbind(melt(Hela_1),melt(Hela_2))
@@ -259,8 +259,8 @@ ggplot(HelaReps, aes(x=value,y=value2,label=genes))+
 ggsave('graphs/RNAFISH/giniReplicates/HeLa.pdf',height=6,width=7)
 
 #SH-SY-5Y cells
-SHSY5Y_pool1 <- read.csv('extractedData/dentistData/20160524_SH_SY_5Y_pool1.txt')
-SHSY5Y_pool2 <- read.csv('extractedData/dentistData/20160524_SH_SY_5Y_pool2.txt')
+SHSY5Y_pool1 <- read.csv('dentistData/20160524_SH_SY_5Y_pool1.txt')
+SHSY5Y_pool2 <- read.csv('dentistData/20160524_SH_SY_5Y_pool2.txt')
 SHSY5Ygini_1 <- apply(SHSY5Y_pool1[,c(3:4,6)],2,function(x) ineq(x,type='Gini'))
 SHSY5Ygini_2 <- apply(SHSY5Y_pool2[,3:6],2,function(x) ineq(x,type='Gini'))
 SHSY5Ygini <- rbind(melt(SHSY5Ygini_1),melt(SHSY5Ygini_2))
@@ -268,8 +268,8 @@ SHSY5Ygini$genes <- rownames(SHSY5Ygini)
 SHSY5Ygini$dataset <- 'SHSY5Y_20160524'
 
 # replicates SHSY5Y
-SHSY5Y_pool1 <- read.csv('extractedData/dentistData/20160616_SHSY5Y_pool1.txt')
-SHSY5Y_pool2 <- read.csv('extractedData/dentistData/20160616_SHSY5Y_pool2.txt')
+SHSY5Y_pool1 <- read.csv('dentistData/20160616_SHSY5Y_pool1.txt')
+SHSY5Y_pool2 <- read.csv('dentistData/20160616_SHSY5Y_pool2.txt')
 SHSY5Ygini_1 <- apply(SHSY5Y_pool1[,c(3:4,6)],2,function(x) ineq(x,type='Gini'))
 SHSY5Ygini_2 <- apply(SHSY5Y_pool2[,3:6],2,function(x) ineq(x,type='Gini'))
 SHSY5Ygini2 <- rbind(melt(SHSY5Ygini_1),melt(SHSY5Ygini_2))

@@ -1,7 +1,7 @@
 cd ~/Dropbox/cancer-rna-fish/ 
 % change this to the location of the repo on your computer
 
-T = readtable('extractedData/dentistData/WM9_noDrug_20150618.txt');
+T = readtable('dentistData/WM9_noDrug_20150618.txt');
 
 Xpos = T.Xpos;
 Ypos = T.Ypos;

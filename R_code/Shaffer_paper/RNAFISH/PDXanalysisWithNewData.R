@@ -3,7 +3,7 @@ setwd('~/Dropbox (RajLab)/Papers/cancerpaper_public/paper/')
 rm(list = ls())
 
 # load tissue data
-data <- read.csv('extractedData/dentistData/PDX_20160115_WM4335_nonResistant.txt')
+data <- read.csv('dentistData/PDX_20160115_WM4335_nonResistant.txt')
 source('plotScripts/RNAFISH/RNAFISH_functions.R')
 loadLibraries()
 
@@ -80,7 +80,7 @@ castPair <- dcast(meltedPair, 'Xpos+Ypos~variable',value.var='value')
 thresholdData <- data.frame(CYR61 = as.integer(castPair$CYR61>CYR61_thresh),
                             LOXL2 = as.integer(castPair$LOXL2>LOXL2_thresh))
 crossTable<-table(thresholdData)
-OR <- 1/oddsRatio(crossTable,conf.level = 0.95) 
+OR <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95) 
 
 print(paste('Contengency table: '))
 print(eval(crossTable))
@@ -104,7 +104,7 @@ print(paste('Total number of cells in the PDX data in Figure 3:', dim(data)[1]))
 
 
 ## Replicate data
-data <- read.csv('extractedData/dentistData/PDX_20150715_WM4299_tissueReplicate.txt')
+data <- read.csv('dentistData/PDX_20150715_WM4299_tissueReplicate.txt')
 
 ### histogram plots
 dataMelt <- melt(data, id=c('Xpos','Ypos'))
@@ -141,13 +141,13 @@ print(paste('Total number of cells in the PDX data in Figure 3:', dim(data)[1]))
 
 
 # October 2016 data
-data1 <- read.csv('extractedData/dentistData/20161024_WM4325_NGFR_AXL_LOXL2.txt')
+data1 <- read.csv('dentistData/20161024_WM4325_NGFR_AXL_LOXL2.txt')
 data1$tissue <- 'WM4335' # this was mislabeled as WM4325, should be WM4335
 data1Melt <- melt(data1, id.vars = c('Xpos','Ypos','tissue'))
-data2 <- read.csv('extractedData/dentistData/20161027_WM3909_NGFR_AXL_LOXL2.txt')
+data2 <- read.csv('dentistData/20161027_WM3909_NGFR_AXL_LOXL2.txt')
 data2$tissue <- 'WM3909'
 data2Melt <- melt(data2, id.vars = c('Xpos','Ypos','tissue'))
-data3 <- read.csv('extractedData/dentistData/20161028_WM4325_NRG1_WNT5A_GAPDH.txt')
+data3 <- read.csv('dentistData/20161028_WM4325_NRG1_WNT5A_GAPDH.txt')
 data3$tissue <- 'WM4335' # this was mislabeled as WM4325, should be WM4335
 data3Melt <- melt(data3, id.vars = c('Xpos','Ypos','tissue'))
 

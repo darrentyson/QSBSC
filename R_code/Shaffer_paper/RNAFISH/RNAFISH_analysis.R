@@ -2,19 +2,19 @@
 # this script will generate all the plots needed for the RNA FISH figure 
 
 # source the RNAFISH_functions that contains all the requied functions 
-source('/Users/paudelbb/Downloads/rajpaper/RNAFISH/RNAFISH_functions.R')
+source('/Users/paudelbb/Downloads/plotScripts/RNAFISH/RNAFISH_functions.R')
 loadLibraries()
 
 # source parameter files for the data
-source('/Users/paudelbb/Downloads/rajpaper/RNAFISH/parameters_WM9_noDrug_20150618.R')
-source('/Users/paudelbb/Downloads/rajpaper/RNAFISH/parameters_WM9_noDrug_20150810.R')
-source('/Users/paudelbb/Downloads/rajpaper/RNAFISH/parameters_WM9_48hrs_20150624.R')
-source('/Users/paudelbb/Downloads/rajpaper/RNAFISH/parameters_WM9_4weeks_20150701.R')
-source('/Users/paudelbb/Downloads/rajpaper/RNAFISH/parameters_WM9_4weeks_20150831.R')
-source('/Users/paudelbb/Downloads/rajpaper/RNAFISH/parameters_primaryMelano_20150717.R')
+source('/Users/paudelbb/Downloads/plotScripts/RNAFISH/parameters_WM9_noDrug_20150618.R')
+source('/Users/paudelbb/Downloads/plotScripts/RNAFISH/parameters_WM9_noDrug_20150810.R')
+source('/Users/paudelbb/Downloads/plotScripts/RNAFISH/parameters_WM9_48hrs_20150624.R')
+source('/Users/paudelbb/Downloads/plotScripts/RNAFISH/parameters_WM9_4weeks_20150701.R')
+source('/Users/paudelbb/Downloads/plotScripts/RNAFISH/parameters_WM9_4weeks_20150831.R')
+source('/Users/paudelbb/Downloads/plotScripts/RNAFISH/parameters_primaryMelano_20150717.R')
 
 # define your plot directory, this is where all your figures will be saved.
-plotDir = "/Users/paudelbb/Downloads/rajpaper/"
+plotDir = "../"
 
 #=============================================================================================================================
 ### Data = WM9_noDrug_20150618
@@ -84,7 +84,7 @@ oddsRatioHeatmap(plotName = paste0(plotName,'gapdhNorm_'),
 thresholdData <- data.frame(AXL = as.integer(noDrugData$AXL>thresholds[13,2]),
                             VEGFC = as.integer(noDrugData$VEGFC>thresholds[12,2]))
 crossTable<-table(thresholdData)
-OR <- 1/oddsRatio(crossTable,conf.level = 0.95) 
+OR <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95) 
 
 #=============================================================================================================================
 #=============================================================================================================================
@@ -159,4 +159,143 @@ numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, data = noDrugDat
 
 #=============================================================================================================================
 #=============================================================================================================================
+
+
+## Data = WM9_4weeks_20150701
+dataList <- load_WM9_4weeks_20150701()
+plotName <- dataList[[1]]
+plotDir <- dataList[[2]]
+data <- dataList[[3]]
+thresholds <- dataList[[4]]
+
+numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, data = data, geneThresholds = thresholds)
+oddsRatioHeatmap(plotName = plotName, plotDir = plotDir, data = data, geneThresholds = thresholds)
+
+
+# now split data into cells in colonies and not in colonies
+dataList <- load_WM9_4weeks_20150701_colonyAnnotations()
+plotName <- dataList[[1]]
+plotDir <- dataList[[2]]
+data <- dataList[[3]]
+thresholds <- dataList[[4]]
+plotName <- paste0(dataList[[1]],'_noCluster')
+numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, data = filter(data,cluster=='noCluster'), geneThresholds = thresholds)
+plotName <- paste0(dataList[[1]],'_colony')
+numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, 
+                        data = filter(data,cluster=='cluster1' | cluster=='cluster2' |
+                                        cluster=='cluster3' | cluster=='cluster4'), 
+                        geneThresholds = thresholds)
+plotName <- paste0(dataList[[1]],'_cluster1')
+numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, data = filter(data,cluster=='cluster1'), geneThresholds = thresholds)
+plotName <- paste0(dataList[[1]],'_cluster2')
+numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, data = filter(data,cluster=='cluster2'), geneThresholds = thresholds)
+plotName <- paste0(dataList[[1]],'_cluster3')
+numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, data = filter(data,cluster=='cluster3'), geneThresholds = thresholds)
+plotName <- paste0(dataList[[1]],'_cluster4')
+numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, data = filter(data,cluster=='cluster4'), geneThresholds = thresholds)
+
+plotName <- paste0(dataList[[1]],'_cluster1')
+oddsRatioHeatmap(plotName = plotName, plotDir = plotDir, data = filter(data, cluster=='cluster1')[1:22], geneThresholds = thresholds)
+
+## Data = WM9_4weeks_20150831
+dataList <- load_WM9_4weeks_20150831()
+plotName <- dataList[[1]]
+plotDir <- dataList[[2]]
+data <- dataList[[3]]
+thresholds <- dataList[[4]]
+
+numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, data = data, geneThresholds = thresholds)
+oddsRatioHeatmap(plotName = plotName, plotDir = plotDir, data = data, geneThresholds = thresholds)
+
+
+# now colony annotations
+dataList <- load_WM9_4weeks_20150831_colonyAnnotations()
+plotName <- dataList[[1]]
+plotDir <- dataList[[2]]
+data <- dataList[[3]]
+thresholds <- dataList[[4]]
+plotName <- paste0(dataList[[1]],'_noCluster')
+numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, data = filter(data,cluster=='noCluster'), geneThresholds = thresholds)
+plotName <- paste0(dataList[[1]],'_colony')
+numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, 
+                        data = filter(data,cluster=='cluster1' | cluster=='cluster2' ), 
+                        geneThresholds = thresholds)
+plotName <- paste0(dataList[[1]],'_cluster1')
+numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, data = filter(data,cluster=='cluster1'), geneThresholds = thresholds)
+plotName <- paste0(dataList[[1]],'_cluster2')
+numberJackpotsHistogram(plotName = plotName, plotDir = plotDir, data = filter(data,cluster=='cluster2'), geneThresholds = thresholds)
+
+plotName <- paste0(dataList[[1]],'_cluster1')
+oddsRatioHeatmap(plotName = plotName, plotDir = plotDir, data = filter(data, cluster=='cluster1')[1:22], geneThresholds = thresholds)
+
+plotName <- paste0(dataList[[1]],'_cluster2')
+oddsRatioHeatmap(plotName = plotName, plotDir = plotDir, data = filter(data, cluster=='cluster2')[1:22], geneThresholds = thresholds)
+
+plotName <- paste0(dataList[[1]],'_noCluster')
+oddsRatioHeatmap(plotName = plotName, plotDir = plotDir, data = filter(data, cluster=='noCluster')[1:22], geneThresholds = thresholds)
+
+## Data = Primary melanocytes
+dataList <- load_primaryMelano_20150717()
+plotName <- dataList[[1]]
+plotDir <- dataList[[2]]
+data <- dataList[[3]]
+thresholds <- dataList[[4]]
+
+scattersForJackpotGenesMelanocytes(plotName = plotName, plotDir=plotDir,data = data)
+oddsRatioHeatmap(plotName = plotName, plotDir = plotDir, data = data, geneThresholds = thresholds)
+twoGeneScatters(plotName = plotName, plotDir = plotDir, data = data, geneThresholds = thresholds, gene1='AXL', gene2='SERPINE1')
+twoGeneScatters(plotName = plotName, plotDir = plotDir, data = data, geneThresholds = thresholds, gene1='AXL', gene2='NGFR')
+#histogramsForPrimaryMelanocyteGenes(plotName = plotName, plotDir = plotDir, data = data)
+
+
+### Let's look at what GAPDH normalization does to all of this.
+dataList <- load_WM9_noDrug_20150810(percentileForThresholds = 0.02)
+plotName <- dataList[[1]]
+plotDir <- dataList[[2]]
+data <- dataList[[3]]
+thresholds <- dataList[[4]]
+
+plotName <-paste0(plotName,'gapdhNorm_')
+
+gapdhNormData <- gapdhNormalizeData(data,50)
+scattersForGAPDHnormData(plotName, plotDir, gapdhNormData)
+
+
+## Identifying FGFR1 as a "burn-in" marker
+
+### Data = WM9_noDrug_20150618
+dataList <- load_WM9_noDrug_20150618(percentileForThresholds = 0.02)
+noDrugData <- dataList[[3]]
+noDrugData.melt <- melt(noDrugData, id =c('cellID','Xpos','Ypos'))
+noDrugData.melt$dataset <- 'noDrugData'
+
+### Data = WM9_noDrug_20150810
+dataList <- load_WM9_noDrug_20150810(percentileForThresholds = 0.02)
+noDrugData2 <- dataList[[3]]
+noDrugData2.melt <- melt(noDrugData2, id =c('cellID','Xpos','Ypos'))
+noDrugData2.melt$dataset <- 'noDrugData2'
+
+## Data = WM9_4weeks_20150701
+dataList <- load_WM9_4weeks_20150701_colonyAnnotations()
+data4Weeks <- dataList[[3]]
+data4Weeks.melt <- melt(data4Weeks, id =c('cellID','Xpos','Ypos','cluster'))
+data4Weeks.melt$dataset <- 'xdrug4weeks'
+
+## Data = WM9_4weeks_20150831
+dataList <- load_WM9_4weeks_20150831_colonyAnnotations()
+data4Weeks2 <- dataList[[3]]
+data4Weeks2.melt <- melt(data4Weeks2, id =c('cellID','Xpos','Ypos','cluster'))
+data4Weeks2.melt$dataset <- 'xdrug4weeks2'
+
+allData <- rbind(noDrugData.melt,noDrugData2.melt,
+                 data4Weeks.melt[,c(1:3,5:7)],data4Weeks2.melt[,c(1:3,5:7)])
+temp <- filter(allData, variable=='FGFR1')
+ggplot(temp,aes(x=value))+geom_histogram()+geom_rug()+
+  facet_wrap(~dataset)+theme_classic()+ggtitle('FGFR1 expression')
+ggsave('graphs/RNAFISH/burnInPlots_FGFR1.pdf')
+
+temp <- filter(allData, variable=='FOSL1')
+ggplot(temp,aes(x=value))+geom_histogram()+geom_rug()+
+  facet_wrap(~dataset)+theme_classic()+ggtitle('FOSL1 expression')
+ggsave('graphs/RNAFISH/burnInPlots_FOSL1.pdf')
 

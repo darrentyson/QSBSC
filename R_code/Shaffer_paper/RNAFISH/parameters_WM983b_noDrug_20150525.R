@@ -8,7 +8,7 @@ load_WM983b_noDrug_20150525 <- function(percentileForThresholds){
   plotName <- 'WM983b_noDrug_20150525_'
   
   # Load data 
-  noDrugData <- read.csv('extractedData/dentistData/WM983b_noDrug_20150525.txt')
+  noDrugData <- read.csv('dentistData/WM983b_noDrug_20150525.txt')
   
   # Load thresholds 
   # We have a minimum threshold based upon how far we cleaned up the data:

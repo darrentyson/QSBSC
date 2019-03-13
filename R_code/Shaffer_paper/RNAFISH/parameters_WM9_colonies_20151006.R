@@ -8,7 +8,7 @@ load_WM9_colonies_20151006 <- function(percentileForThresholds){
   plotName <- 'WM9_colonies_20151006_'
   
   # Load data 
-  colonyData <- read.csv('/Users/paudelbb/Downloads/rajpaper/dentistData/WM9_colonies_20151006.txt')
+  colonyData <- read.csv('dentistData/WM9_colonies_20151006.txt')
   gapdhNormData <- gapdhNormalizeData(colonyData, minGapdh=50)
   
   # Load thresholds 

@@ -6,4 +6,4 @@ rm(list = ls())
 
 # RNA FISH 1 day after NGFR sort in WM9
 
-data <- read.csv('extractedData/')
+data <- read.csv('')

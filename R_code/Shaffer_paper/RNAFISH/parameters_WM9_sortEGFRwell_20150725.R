@@ -8,7 +8,7 @@ load_WM9_sortEGFRwell_20150725 <- function(){
   plotName <- 'WM9_sortEGFRwell_20150725'
   
   # Load data 
-  data <- read.csv('/Users/paudelbb/Downloads/rajpaper/dentistData/WM9_sortEGFRwell_20150725.txt')
+  data <- read.csv('dentistData/WM9_sortEGFRwell_20150725.txt')
   
   # Load thresholds 
   thresholds <- data.frame(geneName=c('EGFR','SOX10','CCNA2','GAPDH','WNT5A','PDGFRB',

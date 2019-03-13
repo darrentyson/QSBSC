@@ -8,7 +8,7 @@ load_WM9_noDrug_20150810 <- function(percentileForThresholds){
   plotName <- 'WM9_noDrug_20150810_'
   
   # Load data 
-  noDrugData <- read.csv('/Users/paudelbb/Downloads/rajpaper/dentistData/WM9_noDrug_20150810.txt')
+  noDrugData <- read.csv('dentistData/WM9_noDrug_20150810.txt')
   gapdhNormData <- gapdhNormalizeData(noDrugData, minGapdh=50)
   
   # Load thresholds 

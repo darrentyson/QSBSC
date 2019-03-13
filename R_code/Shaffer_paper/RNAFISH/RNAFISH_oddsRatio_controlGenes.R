@@ -9,9 +9,9 @@ source('plotScripts/RNAFISH/RNAFISH_functions.R')
 loadLibraries()
 
 ## control data
-controlData1 <- read.csv('extractedData/dentistData/20160502_WM9_noDrug_controlGenes.txt')
+controlData1 <- read.csv('dentistData/20160502_WM9_noDrug_controlGenes.txt')
 controlData1$cellID <- 1:dim(controlData1)[1]
-controlData2 <- read.csv('extractedData/dentistData/20160503_WM9_noDrug_controlGenes.txt')
+controlData2 <- read.csv('dentistData/20160503_WM9_noDrug_controlGenes.txt')
 controlData2$cellID <- 1:dim(controlData2)[1]
 #data <- cbind(controlData1,controlData2)
 
@@ -28,15 +28,15 @@ thresholdData <- applyThresholds(controlData1, thresholds)
 
 # BABAM1-3 vs. KDM5A-4
 crossTable<-table(thresholdData[,c(3,4)])
-1/oddsRatio(crossTable,conf.level = 0.95) #15.97 as GAPDH norm -- 41.74 if not.
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #15.97 as GAPDH norm -- 41.74 if not.
 
 # BABAM1-3 vs. LMNA-5
 crossTable<-table(thresholdData[,c(3,5)])
-1/oddsRatio(crossTable,conf.level = 0.95) #22.04 as GAPDH norm -- 43.599 if not.
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #22.04 as GAPDH norm -- 43.599 if not.
 
 # KDM5A vs. LMNA
 crossTable<-table(thresholdData[,c(4,5)])
-1/oddsRatio(crossTable,conf.level = 0.95) #10.7 as GAPDH norm -- 33.46 if not.
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #10.7 as GAPDH norm -- 33.46 if not.
 
 
 head(controlData1)
@@ -44,7 +44,7 @@ controlData1$KDM5Anorm <- controlData1$KDM5A/controlData1$GAPDH
 controlData1$LMNAnorm <- controlData1$LMNA/controlData1$GAPDH
 controlData1$BABAM1norm <- controlData1$BABAM1/controlData1$GAPDH
 
-controlData1 <- read.csv('extractedData/dentistData/20160502_WM9_noDrug_controlGenes.txt')
+controlData1 <- read.csv('dentistData/20160502_WM9_noDrug_controlGenes.txt')
 controlData1$cellID <- 1:dim(controlData1)[1]
 data <- controlData1
 dataMelt <- melt(data, id=c('Xpos','Ypos','GAPDH','cellID'))
@@ -71,22 +71,22 @@ filter(controlData1,BABAM1==66)
 
 # BABAM1-3 vs. KDM5A-4
 crossTable<-table(thresholdData[,c(4,5)])
-1/oddsRatio(crossTable,conf.level = 0.95) #15.97
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #15.97
 
 # BABAM1-3 vs. LMNA-5
 crossTable<-table(thresholdData[,c(4,6)])
-1/oddsRatio(crossTable,conf.level = 0.95) #22.04
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #22.04
 
 # KDM5A vs. LMNA
 crossTable<-table(thresholdData[,c(5,6)])
-1/oddsRatio(crossTable,conf.level = 0.95) #10.7
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #10.7
 
 
 
 
 
 ## data set 2
-controlData2 <- read.csv('extractedData/dentistData/20160503_WM9_noDrug_controlGenes.txt')
+controlData2 <- read.csv('dentistData/20160503_WM9_noDrug_controlGenes.txt')
 data <- controlData2
 dataMelt <- melt(data, id=c('Xpos','Ypos','GAPDH'))
 dataMelt <- filter(dataMelt, GAPDH>20) 
@@ -105,7 +105,7 @@ thresholdData <- applyThresholds(dataCast, thresholds)
 
 # LMNA vs. KDM5B-4
 crossTable<-table(thresholdData[,c(3,4)])
-1/oddsRatio(crossTable,conf.level = 0.95) #15.97
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #15.97
 
 
 
@@ -165,7 +165,7 @@ dev.off()
 summary(noDrugWM9.pca)
 
 ## new data
-data3 <- read.csv('extractedData/dentistData/20160722_WM9_noDrug_JackpotAndControlGenes.txt')
+data3 <- read.csv('dentistData/20160722_WM9_noDrug_JackpotAndControlGenes.txt')
 data3 <- data3[,3:6]
 noDrugWM9.pca <- princomp(data.frame(data3), cor=TRUE, score=TRUE)
 pdf('graphs/RNAFISH/WM9_noDrug_20160722_WM9_noDrug_controlAndJackpot_PCA_biplot.pdf',
@@ -189,7 +189,7 @@ corrplot(M, method="number",col=col4(20),sig.level=0.01)
 dev.off()
 
 ## burn in genes
-data <-read.csv('extractedData/dentistData/20160725_WM9noDrugA6G3.txt')
+data <-read.csv('dentistData/20160725_WM9noDrugA6G3.txt')
 
 col4 <- colorRampPalette(c("#7F0000","red","#FF7F00","yellow","#7FFF7F", 
                            "cyan", "#007FFF", "blue","#00007F"))  
@@ -214,27 +214,27 @@ thresholdData <- applyThresholds(data, thresholds)
 
 # EGFR-3 vs. C1S-4
 crossTable<-table(thresholdData[,c(3,4)])
-1/oddsRatio(crossTable,conf.level = 0.95) #15.67
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #15.67
 
 # C1S-4 vs. VCL-5
 crossTable<-table(thresholdData[,c(4,5)])
-1/oddsRatio(crossTable,conf.level = 0.95) #10.4
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #10.4
 
 # EGFR vs. VCL
 crossTable<-table(thresholdData[,c(3,5)])
-1/oddsRatio(crossTable,conf.level = 0.95) #13.68
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #13.68
 
 # EGFR vs GAPDH
 crossTable<-table(thresholdData[,c(3,6)])
-1/oddsRatio(crossTable,conf.level = 0.95) #20
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #20
 
 # VCL vs GAPDH
 crossTable<-table(thresholdData[,c(5,6)])
-1/oddsRatio(crossTable,conf.level = 0.95) #50
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #50
 
 # C1S vs GAPDH
 crossTable<-table(thresholdData[,c(4,6)])
-1/oddsRatio(crossTable,conf.level = 0.95) #23
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #23
 
 ##
 allORs <- data.frame(matrix(ncol=3,nrow=dim(thresholdData[,c(3:6)])[2]^2))
@@ -247,7 +247,7 @@ for (j in 1:(dim(thresholdData)[2]-2)){
     crossTable<-table(thresholdData[,c(i+2,j+2)])
     if (dim(crossTable)[1]<2 | dim(crossTable)[2]<2) 
     {allORs$OR[i+4*k] <- NA}
-    else {allORs$OR[i+4*k] <- 1/oddsRatio(crossTable,conf.level = 0.95)}
+    else {allORs$OR[i+4*k] <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95)}
   }
   k=k+1
 }
@@ -278,12 +278,12 @@ ggsave('graphs/RNAFISH/burnIn_oddsRatioHeatmap_WithLegend.pdf',height=8,width=8)
 
 # Try barplot here
 dataEGFR_burnIn <- filter(melted_ORmat,Var1=='EGFR')
-ggplot(dataEGFR_burnIn, aes(x=Var2,y=log2(value)))+geom_bar(stat='identity')+
+ggplot(dataEGFR_burnIn, aes(x=Var2,y=log2(value)))+geom_histogram(stat='identity')+
   theme_classic()+
   ylab('log2(odds ratio) versus EGFR')
 
 # Try dropping GAPDH low cells then ORs normalized by GAPDH?
-data <-read.csv('extractedData/dentistData/20160725_WM9noDrugA6G3.txt')
+data <-read.csv('dentistData/20160725_WM9noDrugA6G3.txt')
 data.filtered <- filter(data, GAPDH>50)
 data.norm <- data.frame(EGFR = data.filtered$EGFR/data.filtered$GAPDH,
                         C1S = data.filtered$C1S/data.filtered$GAPDH,
@@ -299,16 +299,16 @@ thresholdData <- applyThresholds(data.norm, thresholds)
 
 # EGFR vs. VCL
 crossTable<-table(thresholdData[,c(1,3)])
-VCL_OR <- 1/oddsRatio(crossTable,conf.level = 0.95) #4.49 log2=2.1
+VCL_OR <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #4.49 log2=2.1
 
 # EGFR vs. C1S
 crossTable<-table(thresholdData[,c(1,2)])
-1/oddsRatio(crossTable,conf.level = 0.95) #13 log2 = 3.7
-C1S_OR <- 1/oddsRatio(crossTable,conf.level = 0.95)
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #13 log2 = 3.7
+C1S_OR <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95)
 
 # VCL vs. C1S
 crossTable<-table(thresholdData[,c(2,3)])
-1/oddsRatio(crossTable,conf.level = 0.95) #8
+1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #8
 
 
 ### Try same thing with resistance markees:
@@ -333,28 +333,28 @@ thresholdData <- applyThresholds(data.norm, thresholds)
 
 # EGFR vs. WNT5A
 crossTable<-table(thresholdData[,c(1,2)])
-WNT5A_OR <- 1/oddsRatio(crossTable,conf.level = 0.95) #4.49 log2=2.1
+WNT5A_OR <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95) #4.49 log2=2.1
 
 crossTable<-table(thresholdData[,c(1,3)])
-PDGFRB_OR <- 1/oddsRatio(crossTable,conf.level = 0.95) 
+PDGFRB_OR <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95) 
 
 crossTable<-table(thresholdData[,c(1,4)])
-SERPINE1_OR <- 1/oddsRatio(crossTable,conf.level = 0.95) 
+SERPINE1_OR <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95) 
 
 crossTable<-table(thresholdData[,c(1,5)])
-NGFR_OR <- 1/oddsRatio(crossTable,conf.level = 0.95) 
+NGFR_OR <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95) 
 
 crossTable<-table(thresholdData[,c(1,6)])
-AXL_OR <- 1/oddsRatio(crossTable,conf.level = 0.95) 
+AXL_OR <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95) 
 
 crossTable<-table(thresholdData[,c(1,7)])
-VEGFC_OR <- 1/oddsRatio(crossTable,conf.level = 0.95) 
+VEGFC_OR <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95) 
 
 
 dataGAPDHnormBurnIn <- data.frame(gene = c('1_VCL','1_C1S','WNT5A','PDGFRB','SERPINE1','NGFR','AXL','VEGFC'),
                                   OR = c(VCL_OR,C1S_OR,WNT5A_OR,PDGFRB_OR,SERPINE1_OR,NGFR_OR,AXL_OR, VEGFC_OR))
 
-ggplot(dataGAPDHnormBurnIn,aes(x=gene,y=log2(OR)))+geom_bar(stat='identity')
+ggplot(dataGAPDHnormBurnIn,aes(x=gene,y=log2(OR)))+geom_histogram(stat='identity')
 
 
 ### 
@@ -384,7 +384,7 @@ for (j in 1:(dim(thresholdData)[2]-3)){
     crossTable<-table(thresholdData[,c(i+3,j+3)])
     if (dim(crossTable)[1]<2 | dim(crossTable)[2]<2) 
     {allORs$OR[i+19*k] <- NA}
-    else {allORs$OR[i+19*k] <- 1/oddsRatio(crossTable,conf.level = 0.95)}
+    else {allORs$OR[i+19*k] <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95)}
   }
   k=k+1
 }
@@ -432,14 +432,14 @@ dataEGFR_burnIn$dataset <- 'burnIn'
 allData <- rbind(noDrugEGFRdata,dataEGFR_burnIn)
 allData <- allData[-which(allData$Var2=='EGFR'),]
 ggplot(allData, aes(x=Var2,y=log2(value),fill=dataset,color=dataset))+
-  geom_bar(stat='identity',position='jitter')+
+  geom_histogram(stat='identity',position='jitter')+
   theme_classic()+
   ylab('log2(odds ratio) versus EGFR')
 #ggsave('~/Desktop/test.pdf',width=10,height=8)
 
 ## pull up sort seq
-data1 <- read.csv('extractedData/RNAseq/countTables/meltedData_20150722_EGFRsortRNArun1.tsv',sep='\t')
-data2 <- read.csv('extractedData/RNAseq/countTables/meltedData_20150831_EGFRsortRNArun2.tsv',sep='\t')
+data1 <- read.csv('RNAseq/countTables/meltedData_20150722_EGFRsortRNArun1.tsv',sep='\t')
+data2 <- read.csv('RNAseq/countTables/meltedData_20150831_EGFRsortRNArun2.tsv',sep='\t')
 data <- rbind(data1,data2)
 
 # we have to rename the sampleID factors to match our metadata table:
@@ -462,13 +462,13 @@ data$sampleID <- plyr::revalue(data$sampleID, c("SortNoDrugMix1"="nodrug_mix_02"
                                                 "week5-EGFRneg"="5weeks_neg",
                                                 "week5-mix"="5weeks_mix"))
 
-geneIDtoGeneName <- read.csv('extractedData/RNAseq/annotations/hg19gene_idToGeneSymbol.tsv',
+geneIDtoGeneName <- read.csv('RNAseq/annotations/hg19gene_idToGeneSymbol.tsv',
                              sep = "\t", header = TRUE)
 
 data <- merge(data,geneIDtoGeneName,by='gene_id')
 
 # load up metaData
-metaData <- read.csv('extractedData/RNAseq/metaData/EGFRsortRNAseqMetadata.csv')
+metaData <- read.csv('RNAseq/metaData/EGFRsortRNAseqMetadata.csv')
 
 dataAndMeta <- left_join(data,metaData,by='sampleID')
 
@@ -529,7 +529,7 @@ ggsave('graphs/RNAFISH/plotEGFRenrichmentSeqVsFISH_log2.pdf')
 TXNRD1 <- filter(cdata, GeneSymbol=='TXNRD1' & numTime==0)
 
 ###
-data <- read.csv('extractedData/dentistData/20160727_WM9noDrug_BurnIn.txt')
+data <- read.csv('dentistData/20160727_WM9noDrug_BurnIn.txt')
 
 # PCA first:
 data.pca <- princomp(data.frame(data[,c(3:6)]), cor=TRUE, score=TRUE)
@@ -560,7 +560,7 @@ for (j in 1:(dim(thresholdData)[2])){
     crossTable<-table(thresholdData[,c(i,j)])
     if (dim(crossTable)[1]<2 | dim(crossTable)[2]<2) 
     {allORs$OR[i+4*k] <- NA}
-    else {allORs$OR[i+4*k] <- 1/oddsRatio(crossTable,conf.level = 0.95)}
+    else {allORs$OR[i+4*k] <- 1/mosaic::oddsRatio(crossTable,conf.level = 0.95)}
   }
   k=k+1
 }

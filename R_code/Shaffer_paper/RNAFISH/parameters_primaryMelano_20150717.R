@@ -8,7 +8,7 @@ load_primaryMelano_20150717 <- function(){
   plotName <- 'primaryMelano_20150717_'
   
   # Load data 
-  data <- read.csv('/Users/paudelbb/Downloads/rajpaper/dentistData/primaryMelanocytes_20150717.txt')
+  data <- read.csv('dentistData/primaryMelanocytes_20150717.txt')
   
   # Load thresholds 
   thresholds <- data.frame(geneName=c('EGFR','SOX10','CCNA2','GAPDH','WNT5A','PDGFRB',

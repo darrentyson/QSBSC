@@ -9,7 +9,7 @@ load_WM9_1week_20150715 <- function(percentileForThresholds){
   plotName <- 'WM9_1week_20150715_'
   
   # Load data 
-  data <- read.csv('/Users/paudelbb/Downloads/rajpaper/dentistData/WM9_1week_20150715.txt')
+  data <- read.csv('dentistData/WM9_1week_20150715.txt')
   #gapdhNormData <- gapdhNormalizeData(data, minGapdh=50)
   
   # Load thresholds 
