@@ -14,10 +14,12 @@ source('RNAFISH/parameters_WM9_4weeks_20150831.R')
 source('RNAFISH/parameters_primaryMelano_20150717.R')
 
 # define your plot directory, this is where all your figures will be saved.
-plotDir <- path.expand("C:/Users/Gabriella/Documents/QSBSC/Git-Repo/R_code/Shaffer_paper")
+# The path should have a trailing slash to indicate it is a directory. 
+# Please do not save these output files within the Git repo
+plotDir <- path.expand("~/Desktop/Shaffer_figs/")
 if(!file.exists(plotDir)) dir.create(plotDir)
 
-gw#=============================================================================================================================
+#=============================================================================================================================
 ### Data = WM9_noDrug_20150618
 #=============================================================================================================================
 dataList <- load_WM9_noDrug_20150618(percentileForThresholds = 0.02)
