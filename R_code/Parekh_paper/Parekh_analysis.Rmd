@@ -15,17 +15,18 @@ The data for cells cultured in the pluripotent stem cell medium has been put int
 #### NOTE
 The following packages must be installed prior to running (many needed only to load `swne` package. Uncomment to execute.
 
-```{r}
+```{r, results=FALSE}
 # if (!requireNamespace("BiocManager", quietly = TRUE))
 #     install.packages("BiocManager")
 # BiocManager::install("TxDb.Hsapiens.UCSC.hg38.knownGene", version = "3.8")
 # BiocManager::install("org.Hs.eg.db")
 # BiocManager::install("GO.db")
 # devtools::install_github("aertslab/RcisTarget")
-# devtools::install_github("aertslab/AUCell")
 # devtools::install_github("aertslab/cisTopic")
+# devtools::install_version('Seurat', version = "2.3.4")
 # devtools::install_github("yanwu2014/swne")
-# devtools::install_github(repo = 'satijalab/seurat', ref = 'release/3.0')
+# BiocManager::install("qvalue", version = "3.8")
+# devtools::install_github("yanwu2014/perturbLM")
 ```
 
 #### Summary of steps to be run
