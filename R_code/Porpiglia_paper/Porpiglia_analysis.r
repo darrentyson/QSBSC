@@ -53,3 +53,4 @@ d <- d[,!colnames(d) %in% c('beadDist','Event_length')]
 d <- d[,c('sample','rep',head(colnames(d),ncol(d)-2))]
 
 ### Data should now be ready for applying dimensionality reduction, clustering, etc
+write.csv(d,'../../Data/Porpiglia/FR-FCM-ZY3K_gated.csv',row.names=FALSE)
