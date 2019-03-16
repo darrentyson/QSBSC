@@ -1,4 +1,4 @@
-#### Code to visualize Porpiglia et al. Zy3K CyToF data
+#### Code to visualize Porpiglia et al. CyToF data (FR-FCM-ZY3K from FlowRepository.org)
 Please use the `lau` conda environment by typing `conda activate lau` in the Anaconda Prompt or using the Anaconda Navigator app.
 
 You will need to ensure that `cellxgene` is installed. You can check by typing `conda list` and searching for `cellxgene`.
