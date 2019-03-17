@@ -1,4 +1,5 @@
-# Biddy data analysis
+# Biddy data analysi/
+setwd('C:/Users/Dora Obodo/VANDERBILT/1st Year/SPRING 2019/MM2 Quant Sys Bio SC/QSBSC/R_code/Biddy_paper')
 library(readxl)
 filepaths <- list.files('data', full.names=TRUE)
 
